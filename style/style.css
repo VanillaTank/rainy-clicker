@@ -1,0 +1,62 @@
+:root {
+    --primary-font-color: #1b1b1c;
+    --main-color: rgb(149, 146, 146);
+    --accent-color: #666;
+}
+
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    color: var(--primary-font-color);
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+ul > li {
+    list-style: 0;
+}
+
+body {
+    background-image: url('../img/lofi-bgc.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.container {
+    margin: 0 auto;
+    padding: 0 15px;
+    max-width: 1200px;
+}
+.header {
+    background-color: var(--main-color);
+    min-height: 80px;
+    padding: 20px 0;
+}
+.main {
+    margin-top: 25px;
+    flex-grow: 1;
+}
+.header-inner {
+    display: flex;
+}
+.canvas-game {
+    background-color: rgba(255, 255, 255, 0.597);
+    border: 1px solid #fff;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.footer {
+    margin: auto 0 0 0;
+    background-color: var(--main-color);
+}
+.footer__sign {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/style.css">
+    <title>Rainy clicker</title>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="rule-btns">
+                    <button class="btn" id="btn-play-pause" type="button">ПП</button>
+                    <button class="btn" id="btn-open-settings" type="button">S</button>
+                </div>
+                <div>
+                    <div class="score" id="score"></div>
+                    <div class="music-player"></div>
+                </div>
+                <div class="logo"></div>
+                <div></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <canvas class="canvas-game" id="game"></canvas>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__sign">
+                Сделано <a href="https://github.com/VanillaTank?tab=repositories">VanillaTank</a>, (c)2022
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/Music.js"></script>
+    <script src="./js/Game.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>
