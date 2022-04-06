@@ -12,11 +12,11 @@ class Game {
   drawTarget() {
 
     const target = document.createElement('div');
-    target.classList.add('target');
+    target.classList.add('target', 'notClicked');
     const styledTarget = target.style;
 
-    const randomX = Math.floor(50 + Math.random() * (this._gameFieldWidth + 1 - 50));
-    const randomY = Math.floor(50 + Math.random() * (this._gameFieldHeight + 1 - 50));
+    const randomX = Math.floor(60 + Math.random() * (this._gameFieldWidth + 1 - 60));
+    const randomY = Math.floor(60 + Math.random() * (this._gameFieldHeight + 1 - 60));
     styledTarget.left = randomX + this.#px;
     styledTarget.top = randomY + this.#px;
 
@@ -26,8 +26,8 @@ class Game {
   }
 
   onClick(target, clientX, clientY) {
-    if (target.classList.contains('target')) {
-      target.classList.remove('target');
+    if (target.classList.contains('target') && target.classList.contains('notClicked')) {
+      target.classList.remove('notClicked');
       this.onTargetClickAnimation(clientX, clientY);
       this.changeCount()
     }
@@ -54,6 +54,11 @@ class Game {
   changeCount() {
     this.count++;
     document.querySelector('#score').textContent = this.count
+  }
+
+
+  setCount(el) {
+    document.querySelector(el).textContent = this.count;
   }
 
   #removeRainyCircle() {

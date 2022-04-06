@@ -3,7 +3,9 @@ window.onload = () => {
     const game = new Game(gameField);
     const startPauseBtn = document.querySelector('#btn-play-pause');
 
+    game.setCount('#score')
     let bubbleInterval = setInterval(() => { game.drawTarget() }, 1400)
+    
 
     startPauseBtn.addEventListener('click', () => {
         if (bubbleInterval) {

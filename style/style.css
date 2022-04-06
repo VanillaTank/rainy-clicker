@@ -50,10 +50,10 @@ body {
 }
 @keyframes water {
     0% {
-        background-position: -5% -5%;
+        background-position: 8% 11%;
     }
     100% {
-        background-position: 10% 70%;
+        background-position: 20% 43%;
     }
 }
 .main .container {
@@ -87,13 +87,13 @@ body {
 .pulse {
     background-color: #7de3e3;
     border-radius: 50%;
-    animation: pulse .9s ease-out;
+    animation: pulse .8s ease-out;
     transform: scale(0);
     position: absolute;
     pointer-events: none;
-  }
+}
   
-  @keyframes pulse {
+@keyframes pulse {
     to {
       transform: scale(2.5);
       background-color: #fff;
@@ -122,4 +122,29 @@ body {
         transform: scale(0);
         opacity: 0.1;
       }
+}
+
+.logo {
+    width: 150px;
+    height: 50px;
+    background-color: #1fb7e1;
+    margin-right: 30px;
+}
+
+.btn {
+    background-color: #dbfbff;
+    border-radius: 2px;
+    border: none;
+    box-shadow: none;
+    padding: 18px;
+    display: inline-block;
+    margin: 0 10px;
+    user-select: none;
+}
+
+.score {
+    margin-left: 30px;
+    font-size: 40px;
+    color: #1b1b1c;
+    max-width: 120px;
 }
