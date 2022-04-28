@@ -74,16 +74,41 @@
 
 .forest .btn {
     background-color: #43453A;
-
 }
 
+.forest .btn:hover {
+    background-color: #53554A;
+}
+
+.forest .btn:active {
+    background-color: #34362B;
+}
+
+
 .leaves .btn {
-    background-color: #3C465B;
+    background-color: #1C1F1C;
+}
+
+.leaves .btn:hover {
+    background-color: #2B2E2B;
+}
+
+.leaves .btn:active {
+    background-color: #0D100D;
 }
 
 .window .btn {
-    background-color: #1C1F1C;
+    background-color: #3C465B;
 }
+
+.window .btn:hover {
+    background-color: #5A6479;
+}
+
+.window .btn:active {
+    background-color: #3C465B;
+}
+
 
 .player-field {
     width: 643px;
