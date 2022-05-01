@@ -14,14 +14,23 @@
     <div class="theme forest">
         <div class="container">
             <header class="header">
-                <button class="btn" type="button">Start game</button>
-                <button class="btn" type="button">Start Music</button>
+                <button class="btn" id="toggle-game-btn" type="button">Start game</button>
+                <button class="btn" id="toggle-music-btn" type="button">
+                    <span class="started-music-text">Start Music</span> 
+                    <span class="paused-music-text">Pause Music</span> 
+                </button>
 
                 <div class="player-field">
-                    Player field
+                    <div id="audio-controls">
+                        <div class="audio-track">
+                            <div class="time"></div>
+                        </div>
+                        <button class="resetBtn swap">swap</button>
+                        <input class="volume" type="range" min="0" max="100" step="1">
+                    </div>
                 </div>
 
-                <button class="btn" type="button">settings</button>
+                <button class="btn" id="settingsBtn" type="button">settings</button>
             </header>
 
 
@@ -30,7 +39,9 @@
         </div>
     </div>
 
+    <audio id="selectedSong"></audio>
 
+    <script src="./js/Music.js"></script>
     <script src="./js/main.js"></script>
 </body>
 

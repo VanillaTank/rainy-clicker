@@ -1,0 +1,13 @@
+.audio-track {
+    width: 150px;
+    height: 3px;
+    background-color: #dddddd;
+    margin: 20px 0;
+    cursor: pointer;
+}
+ 
+.time {
+    width: 0;
+    height: 3px;
+    background-color: #474747
+}

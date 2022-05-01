@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="controls">
+        <div class="audio-track">
+            <div class="time"></div>
+        </div>
+        <button class="play">Play</button>
+        <button class="pause">Pause</button>
+        <button class="prev">&#60;prev</button>
+        <button class="next">next&#62;</button>
+        <input class="volumeController" type="range" min="0" max="100" step="1" value="50">
+    </div>
+
+    <audio id="audio" src="unreal-rest_by_roman-pchela.mp3"></audio>
+
+
+    <script>
+        let audio = document.getElementById("audio");
+        let time = document.querySelector(".time");
+        let btnPlay = document.querySelector(".play");
+        let btnPause = document.querySelector(".pause");
+        let btnPrev = document.querySelector(".prev");
+        let btnNext = document.querySelector(".next");
+        let audioTrack = document.querySelector('.audio-track');
+        let volumeController = document.querySelector('.volumeController');
+        let audioPlay = null;
+
+        let playlist = [
+            'unreal-rest_by_roman-pchela.mp3',
+            'stellar-sky_by_ahoami.mp3',
+        ];
+
+        let treck;
+        window.onload = function () {
+            treck = 0;
+            audio.volume = 0.5;
+        }
+
+        volumeController.addEventListener('input',() => {
+            let newSpeed = volumeController.value;
+            audio.volume = newSpeed / 100;
+        })
+
+        function switchTreck(numTreck) {
+            audio.src = playlist[numTreck];
+            audio.currentTime = 0;
+            audio.play();
+        }
+        
+        audioTrack.addEventListener('click', (event) => {
+            let selectedTime = event.offsetX;
+            let selectedProcent = Math.round(selectedTime / audioTrack.offsetWidth * 100);
+            
+            let targetTime = audio.duration * selectedProcent / 100;
+            audio.currentTime = targetTime;
+            time.style.width = selectedProcent + '%';
+        })
+
+
+        btnPlay.addEventListener("click", function () {
+            audio.play();
+            audioPlay = setInterval(function () {
+
+                let audioTime = Math.round(audio.currentTime);
+
+                let audioLength = Math.round(audio.duration);
+
+                time.style.width = (audioTime * 100) / audioLength + '%';
+                if (audioTime == audioLength && treck < playlist.length - 1) {
+                    treck++;
+                    switchTreck(treck);
+                } else if (audioTime == audioLength && treck >= playlist.length - 1) {
+                    treck = 0;
+                    switchTreck(treck);
+                }
+            }, 10)
+        });
+
+        btnPause.addEventListener("click", function () {
+            audio.pause();
+            clearInterval(audioPlay);
+        });
+
+
+        btnPrev.addEventListener("click", function () {
+            if (treck > 0) {
+                treck--;
+                switchTreck(treck);
+            } else {
+                treck = playlist.length - 1;
+                switchTreck(treck);
+            }
+        });
+
+        btnNext.addEventListener("click", function () {
+            if (treck < playlist.length - 1) {
+                treck++;
+                switchTreck(treck); 
+            } else {
+                treck = 0;
+                switchTreck(treck);
+            }
+        });
+
+
+
+    </script>
+
+</body>
+
+</html>
