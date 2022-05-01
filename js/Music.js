@@ -1,35 +1,38 @@
 class Music {
 
-    // playlist = [
-    //     { title: '5-am_by_danyvin', id: 'song1', path: '../sounds/5-am_by_danyvin.mp3' },
-    //     { title: 'barradeen-the-girl-i-havent-met', id: 'song2', path: '../sounds/barradeen-the-girl-i-havent-met.mp3' },
-    //     { title: 'coffee-time_by_pure', id: 'song3', path: '../sounds/coffee-time_by_pure.mp3' },
-    //     { title: 'ghostrifter-back-home', id: 'song4', path: '../sounds/ghostrifter-back-home.mp3' },
-    //     { title: 'ghostrifter-subtle-break', id: 'song5', path: '../sounds/ghostrifter-subtle-break.mp3' },
-    //     { title: 'le-gang-pain-away', id: 'song6', path: '../sounds/le-gang-pain-away.mp3' },
-    //     { title: 'small-planets_by_finval', id: 'song7', path: '../sounds/small-planets_by_finval.mp3' },
-    //     { title: 'stellar-sky_by_ahoami', id: 'song8', path: '../sounds/stellar-sky_by_ahoami.mp3' },
-    //     { title: 'unreal-rest_by_roman-pchela', id: 'song9', path: '../sounds/unreal-rest_by_roman-pchela.mp3' },
-
-    //     // {title: 'ffgdf', id: '9405943', path: '../sounds/'},
-    // ]
-
     playlist = [
-        { title: '0', id: 'song0', path: '../sounds/5-am_by_danyvin.mp3' },
-        { title: '1', id: 'song1', path: '../sounds/barradeen-the-girl-i-havent-met.mp3' },
-        { title: '2', id: 'song2', path: '../sounds/coffee-time_by_pure.mp3' },
-        { title: '3', id: 'song3', path: '../sounds/ghostrifter-back-home.mp3' },
-        { title: '4', id: 'song4', path: '../sounds/ghostrifter-subtle-break.mp3' },
-        { title: '5', id: 'song5', path: '../sounds/le-gang-pain-away.mp3' },
-        { title: '6', id: 'song6', path: '../sounds/small-planets_by_finval.mp3' },
-        { title: '7', id: 'song7', path: '../sounds/stellar-sky_by_ahoami.mp3' },
-        { title: '8', id: 'song8', path: '../sounds/unreal-rest_by_roman-pchela.mp3' },
+        { title: '5-am_by_danyvin', id: 'song1', path: '../sounds/5-am_by_danyvin.mp3' },
+        { title: 'barradeen-the-girl-i-havent-met', id: 'song2', path: '../sounds/barradeen-the-girl-i-havent-met.mp3' },
+        { title: 'coffee-time_by_pure', id: 'song3', path: '../sounds/coffee-time_by_pure.mp3' },
+        { title: 'ghostrifter-back-home', id: 'song4', path: '../sounds/ghostrifter-back-home.mp3' },
+        { title: 'ghostrifter-subtle-break', id: 'song5', path: '../sounds/ghostrifter-subtle-break.mp3' },
+        { title: 'le-gang-pain-away', id: 'song6', path: '../sounds/le-gang-pain-away.mp3' },
+        { title: 'small-planets_by_finval', id: 'song7', path: '../sounds/small-planets_by_finval.mp3' },
+        { title: 'stellar-sky_by_ahoami', id: 'song8', path: '../sounds/stellar-sky_by_ahoami.mp3' },
+        { title: 'unreal-rest_by_roman-pchela', id: 'song9', path: '../sounds/unreal-rest_by_roman-pchela.mp3' },
+
+        // {title: 'ffgdf', id: '9405943', path: '../sounds/'},
     ]
+
+    // playlist = [
+    //     { title: '0', id: 'song0', path: '../sounds/5-am_by_danyvin.mp3' },
+    //     { title: '1', id: 'song1', path: '../sounds/barradeen-the-girl-i-havent-met.mp3' },
+    //     { title: '2', id: 'song2', path: '../sounds/coffee-time_by_pure.mp3' },
+    //     { title: '3', id: 'song3', path: '../sounds/ghostrifter-back-home.mp3' },
+    //     { title: '4', id: 'song4', path: '../sounds/ghostrifter-subtle-break.mp3' },
+    //     { title: '5', id: 'song5', path: '../sounds/le-gang-pain-away.mp3' },
+    //     { title: '6', id: 'song6', path: '../sounds/small-planets_by_finval.mp3' },
+    //     { title: '7', id: 'song7', path: '../sounds/stellar-sky_by_ahoami.mp3' },
+    //     { title: '8', id: 'song8', path: '../sounds/unreal-rest_by_roman-pchela.mp3' },
+    // ]
 
     autoPlayTimeout = null;
     currentAudioHTMLElement = document.querySelector('#selectedSong');
+    audioТameHTMLElement = document.querySelector('.audio-name');
+
     currentTrackIndex = null;
     isSwapModeOn = null;
+    currentAudio = null;
 
     getPlaylist = () => {
         let result = '<ul  class="songs-menu">';
@@ -65,17 +68,22 @@ class Music {
 
     setSelectedAudioPath(id) {
         const selectedSong = this.playlist.filter(el => el.id === id);
+        this.currentAudio = selectedSong;
         const path = selectedSong[0].path;
 
         if (path === this.currentAudioHTMLElement.getAttribute('src')) { return }
 
         this.currentAudioHTMLElement.setAttribute("src", path);
+
+        this.updateAudioName()
     }
 
     switchTrackByIndex(index) {
         this.currentAudioHTMLElement.setAttribute("src", this.playlist[index].path);
         this.currentAudioHTMLElement.currentTime = 0;
+        this.currentAudio = this.playlist[index];
         this.toggleStateSong();
+        this.updateAudioName()
     }
 
     toggleStateSong() {
@@ -83,7 +91,7 @@ class Music {
             this.currentAudioHTMLElement.play();
 
             console.log(`this.isSwapModeOn: ${this.isSwapModeOn}`);
-            
+
             this.autoPlayTimeout = setInterval(() => {
 
                 let audioTime = Math.round(this.currentAudioHTMLElement.currentTime);
@@ -92,7 +100,7 @@ class Music {
 
                 document.querySelector(".time").style.width = (audioTime * 100) / audioLength + '%';
 
-                if(audioTime === audioLength && this.isSwapModeOn) {
+                if (audioTime === audioLength && this.isSwapModeOn) {
                     let nextTrackID = this.getRandomID();
                     console.log(`nextTrackID: ${nextTrackID}`);
                     this.setSelectedAudioPath(nextTrackID);
@@ -126,7 +134,7 @@ class Music {
 
     setVolume(volume) {
         document.querySelector('#selectedSong').volume = volume;
-       this.changeSettings('volume', volume);
+        this.changeSettings('volume', volume);
     }
 
     changePoint(selectedTime, fullWidth) {
@@ -150,5 +158,9 @@ class Music {
     setSwapMode(bool) {
         this.isSwapModeOn = bool;
         this.changeSettings('isSwapModeOn', this.isSwapModeOn);
+    }
+
+    updateAudioName() {
+        this.audioТameHTMLElement.textContent = this.currentAudio[0].title;
     }
 }

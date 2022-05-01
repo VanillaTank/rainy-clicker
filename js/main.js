@@ -21,6 +21,10 @@ window.onload = () => {
     }
 
     audioTrack.addEventListener('click', (event) => { music.changePoint(event.offsetX, audioTrack.offsetWidth) });
+    audioTrack.addEventListener('drag', (event) => { 
+        console.log(123);
+        music.changePoint(event.offsetX, audioTrack.offsetWidth) });
+
     volume.addEventListener('input', () => { music.setVolume(volume.value / 100) });
     swapBtn.addEventListener('click', () => music.onSwapModeHandler());
 
