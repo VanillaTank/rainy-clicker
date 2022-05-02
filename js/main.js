@@ -18,12 +18,10 @@ window.onload = () => {
         changeStyle(settings.theme);
         music.setVolume(settings.audio.volume);
         music.setSwapMode(settings.audio.isSwapModeOn);
+        music.setRepeatMode(settings.audio.isRepeatModeOn);
     }
 
     audioTrack.addEventListener('click', (event) => { music.changePoint(event.offsetX, audioTrack.offsetWidth) });
-    audioTrack.addEventListener('drag', (event) => { 
-        console.log(123);
-        music.changePoint(event.offsetX, audioTrack.offsetWidth) });
 
     volume.addEventListener('input', () => { music.setVolume(volume.value / 100) });
     swapBtn.addEventListener('click', () => music.onSwapModeHandler());
@@ -31,6 +29,9 @@ window.onload = () => {
     document.querySelector('#settingsBtn').addEventListener('click', showSettings);
 
     document.querySelector('#toggle-music-btn').addEventListener('click', toggleMusic);
+    document.querySelector('.loop').addEventListener('click', () => music.onRepeatModeHandler())
+    document.querySelector('.back').addEventListener('click', () => music.goToPrevSong());
+    document.querySelector('.next').addEventListener('click', () => music.goToNextSong());
 
     const id = music.getRandomID();
     music.setSelectedAudioPath(id);
@@ -122,6 +123,12 @@ window.onload = () => {
             div.remove();
         })
 
+        document.addEventListener('keyup', (event) => {
+            if(event.key === "Esc" || event.key === "Escape") {
+                div.remove();
+            }
+        })
+
         settingsHandlers();
     }
 
@@ -143,16 +150,23 @@ window.onload = () => {
         const musicPlayBtns = [...document.querySelectorAll('.songs-item-start-btn')];
         musicPlayBtns.forEach((el) => {
             el.addEventListener('click', (event) => {
-                const id = event.target.closest('li').id;
+                const currentSongLi = event.target.closest('li');
+                const id = currentSongLi.id;
                 music.setSelectedAudioPath(id);
                 music.toggleStateSong();
 
-                if (prevSongID !== null && id !== prevSongID) {
+                if (prevSongID !== null && prevSongID !== id) {
                     document.querySelector(`#${prevSongID}`).classList.remove('active');
                 }
 
-                event.target.closest('li').classList.toggle('active');
-                document.querySelector('#toggle-music-btn').classList.toggle('active');
+                currentSongLi.classList.toggle('active');
+
+                if (currentSongLi.classList.contains('active')) {
+                    document.querySelector('#toggle-music-btn').classList.add('active');
+                } else {
+                    document.querySelector('#toggle-music-btn').classList.remove('active');
+                }
+
                 prevSongID = id;
             })
         })

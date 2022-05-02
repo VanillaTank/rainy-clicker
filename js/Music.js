@@ -11,7 +11,7 @@ class Music {
         { title: 'stellar-sky_by_ahoami', id: 'song8', path: '../sounds/stellar-sky_by_ahoami.mp3' },
         { title: 'unreal-rest_by_roman-pchela', id: 'song9', path: '../sounds/unreal-rest_by_roman-pchela.mp3' },
 
-        // {title: 'ffgdf', id: '9405943', path: '../sounds/'},
+        // {title: 'ffgdf', id: 'song', path: '../sounds/'},
     ]
 
     // playlist = [
@@ -32,7 +32,9 @@ class Music {
 
     currentTrackIndex = null;
     isSwapModeOn = null;
+    isRepeatModeOn = false;
     currentAudio = null;
+    prevSongIndex = null;
 
     getPlaylist = () => {
         let result = '<ul  class="songs-menu">';
@@ -68,7 +70,7 @@ class Music {
 
     setSelectedAudioPath(id) {
         const selectedSong = this.playlist.filter(el => el.id === id);
-        this.currentAudio = selectedSong;
+        this.currentAudio = selectedSong[0];
         const path = selectedSong[0].path;
 
         if (path === this.currentAudioHTMLElement.getAttribute('src')) { return }
@@ -83,14 +85,12 @@ class Music {
         this.currentAudioHTMLElement.currentTime = 0;
         this.currentAudio = this.playlist[index];
         this.toggleStateSong();
-        this.updateAudioName()
+        this.updateAudioName();
     }
 
     toggleStateSong() {
         if (this.currentAudioHTMLElement.paused) {
             this.currentAudioHTMLElement.play();
-
-            console.log(`this.isSwapModeOn: ${this.isSwapModeOn}`);
 
             this.autoPlayTimeout = setInterval(() => {
 
@@ -100,27 +100,39 @@ class Music {
 
                 document.querySelector(".time").style.width = (audioTime * 100) / audioLength + '%';
 
+                if (this.isRepeatModeOn) {
+                    this.currentAudioHTMLElement.setAttribute('loop', 'loop');
+                } else {
+                    this.currentAudioHTMLElement.removeAttribute('loop');
+                }
+
                 if (audioTime === audioLength && this.isSwapModeOn) {
                     let nextTrackID = this.getRandomID();
-                    console.log(`nextTrackID: ${nextTrackID}`);
                     this.setSelectedAudioPath(nextTrackID);
                     this.toggleStateSong();
                     clearInterval(this.autoPlayTimeout);
+                    return
                 }
 
-                if (audioTime === audioLength && this.currentTrackIndex < this.playlist.length - 1 && !this.isSwapModeOn) {
-                    this.currentTrackIndex = this.currentTrackIndex + 1;
-                    console.log(`this.currentTrackIndex: ${this.currentTrackIndex}`);
-                    this.switchTrackByIndex(this.currentTrackIndex);
-                    clearInterval(this.autoPlayTimeout);
+                if (!this.isSwapModeOn && !this.isRepeatModeOn) {
+                    if (audioTime === audioLength && this.currentTrackIndex < this.playlist.length - 1) {
+                        this.prevSongIndex = this.currentTrackIndex;
+                        this.currentTrackIndex = this.currentTrackIndex + 1;
+                        this.switchTrackByIndex(this.currentTrackIndex);
+                        clearInterval(this.autoPlayTimeout);
+                        return
+                    }
+                    else if (audioTime === audioLength && this.currentTrackIndex >= this.playlist.length - 1) {
+                        this.prevSongIndex = this.currentTrackIndex;
+                        this.currentTrackIndex = 0;
+                        this.switchTrackByIndex(this.currentTrackIndex);
+                        clearInterval(this.autoPlayTimeout);
+                        return
+                    }
                 }
-                else if (audioTime === audioLength && this.currentTrackIndex >= this.playlist.length - 1 && !this.isSwapModeOn) {
-                    this.currentTrackIndex = 0;
-                    console.log(`this.currentTrackIndex: ${this.currentTrackIndex}`);
-                    this.switchTrackByIndex(this.currentTrackIndex);
-                    clearInterval(this.autoPlayTimeout);
-                }
-            }, 60)
+
+            }, 60);
+
         } else {
             this.currentAudioHTMLElement.pause();
             clearInterval(this.autoPlayTimeout);
@@ -129,6 +141,7 @@ class Music {
 
     getRandomID() {
         let index = Math.floor(Math.random() * this.playlist.length);
+        this.currentTrackIndex = index;
         return this.playlist[index].id;
     }
 
@@ -146,6 +159,13 @@ class Music {
 
     onSwapModeHandler() {
         this.isSwapModeOn = !this.isSwapModeOn;
+        this.isRepeatModeOn = false;
+        if (this.isSwapModeOn) {
+            document.querySelector('.swap').classList.add('active');
+            document.querySelector('.loop').classList.remove('active');
+        } else {
+            document.querySelector('.swap').classList.remove('active');
+        }
         this.changeSettings('isSwapModeOn', this.isSwapModeOn);
     }
 
@@ -156,11 +176,135 @@ class Music {
     }
 
     setSwapMode(bool) {
-        this.isSwapModeOn = bool;
-        this.changeSettings('isSwapModeOn', this.isSwapModeOn);
+        if (bool) {
+            this.isSwapModeOn = true;
+            this.isRepeatModeOn = false;
+            document.querySelector('.swap').classList.add('active');
+            document.querySelector('.loop').classList.remove('active');
+        } else {
+            this.isSwapModeOn = false;
+            document.querySelector('.swap').classList.remove('active');
+        }
     }
 
     updateAudioName() {
-        this.audioТameHTMLElement.textContent = this.currentAudio[0].title;
+        this.audioТameHTMLElement.textContent = this.currentAudio.title;
+    }
+
+    onRepeatModeHandler() {
+        this.isRepeatModeOn = !this.isRepeatModeOn;
+        this.isSwapModeOn = false;
+        if (this.isRepeatModeOn) {
+            document.querySelector('.loop').classList.add('active');
+            document.querySelector('.swap').classList.remove('active');
+        } else {
+            document.querySelector('.loop').classList.remove('active');
+        }
+        this.changeSettings('isRepeatModeOn', this.isRepeatModeOn);
+    }
+
+    setRepeatMode(bool) {
+        if (bool) {
+            this.isRepeatModeOn = true;
+            this.isSwapModeOn = false;
+            document.querySelector('.loop').classList.add('active');
+            document.querySelector('.swap').classList.remove('active');
+            this.currentAudioHTMLElement.setAttribute('loop', 'loop');
+        } else {
+            this.isRepeatModeOn = false;
+            document.querySelector('.loop').classList.remove('active');
+            this.currentAudioHTMLElement.removeAttribute('loop');
+        }
+    }
+
+    goToPrevSong() {
+
+        if (!this.currentAudioHTMLElement.paused) {
+            if (this.prevSongIndex && this.isSwapModeOn) {
+                this.switchTrackByIndex(this.prevSongIndex);
+                return
+            }
+
+            if (!this.prevSongIndex && this.isSwapModeOn) {
+                this.currentTrackIndex = Math.floor(Math.random() * this.playlist.length);
+                this.switchTrackByIndex(this.currentTrackIndex);
+                return
+            }
+
+            if (!this.prevSongIndex && !this.isSwapModeOn) {
+                if (this.currentTrackIndex === 0) {
+                    this.currentTrackIndex = this.playlist.length - 1
+                    this.switchTrackByIndex(this.currentTrackIndex);
+                } else {
+                    this.currentTrackIndex = this.currentTrackIndex - 1
+                    this.switchTrackByIndex(this.currentTrackIndex);
+                }
+            }
+        } else {
+
+            if (this.prevSongIndex && this.isSwapModeOn) {
+                this.prevSongIndex = null;
+                const id = this.playlist[this.prevSongIndex].id;
+                this.setSelectedAudioPath(id);
+                return
+            }
+
+            if (!this.prevSongIndex && this.isSwapModeOn) {
+                this.currentTrackIndex = Math.floor(Math.random() * this.playlist.length)
+                const id = this.playlist[this.currentTrackIndex].id;
+                this.setSelectedAudioPath(id);
+                return
+            }
+
+            if (!this.prevSongIndex && !this.isSwapModeOn) {
+                if (this.currentTrackIndex === 0) {
+                    this.currentTrackIndex = this.playlist.length - 1;
+                    const id = this.playlist[this.currentTrackIndex].id;
+                    this.setSelectedAudioPath(id);
+                } else {
+                    this.currentTrackIndex = this.currentTrackIndex - 1;
+                    const id = this.playlist[this.currentTrackIndex].id;
+                    this.setSelectedAudioPath(id);
+                }
+            }
+        }
+
+
+    }
+
+    goToNextSong() {
+
+        if (!this.currentAudioHTMLElement.paused) {
+
+            if (this.isSwapModeOn) {
+                this.currentTrackIndex = Math.floor(Math.random() * this.playlist.length);
+            }
+            else {
+                if (this.currentTrackIndex === this.playlist.length - 1) {
+                    this.currentTrackIndex = 0;
+                } else {
+                    this.currentTrackIndex = this.currentTrackIndex + 1
+                }
+            }
+            this.switchTrackByIndex(this.currentTrackIndex);
+            return
+        }
+
+        if (this.currentAudioHTMLElement.paused) {
+            if (this.isSwapModeOn) {
+                this.currentTrackIndex = Math.floor(Math.random() * this.playlist.length);
+            }
+            else {
+                if (this.currentTrackIndex === this.playlist.length - 1) {
+                    this.currentTrackIndex = 0;
+
+                } else {
+                    this.currentTrackIndex = this.currentTrackIndex + 1;
+                }
+            }
+            const id = this.playlist[this.currentTrackIndex].id;
+            this.setSelectedAudioPath(id);
+            return;
+        }
     }
 }
