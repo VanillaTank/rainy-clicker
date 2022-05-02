@@ -1,7 +1,9 @@
 window.onload = () => {
 
     const music = new Music();
+    const bubbles = new Bubbles();
     let prevSongID = null;
+    let wasBubbleStarted = false;
 
     const audioTrack = document.querySelector('.audio-track');
     const volume = document.querySelector('.volume');
@@ -19,6 +21,8 @@ window.onload = () => {
         music.setVolume(settings.audio.volume);
         music.setSwapMode(settings.audio.isSwapModeOn);
         music.setRepeatMode(settings.audio.isRepeatModeOn);
+        bubbles.startBubbles();
+        wasBubbleStarted = true;
     }
 
     audioTrack.addEventListener('click', (event) => { music.changePoint(event.offsetX, audioTrack.offsetWidth) });
@@ -33,8 +37,32 @@ window.onload = () => {
     document.querySelector('.back').addEventListener('click', () => music.goToPrevSong());
     document.querySelector('.next').addEventListener('click', () => music.goToNextSong());
 
+    document.querySelector('#toggle-game-btn').addEventListener('click', () => {
+
+        if (document.querySelector('#toggle-game-btn').classList.contains('active')) {
+            bubbles.stopBubbles();
+            document.querySelector('#toggle-game-btn').classList.remove('active');
+            wasBubbleStarted = false;
+        }
+        else {
+            bubbles.startBubbles();
+            document.querySelector('#toggle-game-btn').classList.add('active');
+            wasBubbleStarted = true;
+        }
+    })
+
     const id = music.getRandomID();
     music.setSelectedAudioPath(id);
+
+
+    window.onblur = () => {
+        bubbles.stopBubbles();
+        window.onfocus = () => { if (wasBubbleStarted) { bubbles.startBubbles() }};
+    };
+
+    window.addEventListener('focusout', () => { bubbles.stopBubbles() });
+
+    window.addEventListener('resize', () => { bubbles.updateBoundaries() })
 
 
     // -----------------------------------------------------------------------------------
@@ -69,6 +97,8 @@ window.onload = () => {
 
         document.querySelector('#greetingBtn').addEventListener('click', () => {
             div.remove();
+            bubbles.startBubbles();
+            wasBubbleStarted = true;
         })
     }
 
@@ -124,7 +154,7 @@ window.onload = () => {
         })
 
         document.addEventListener('keyup', (event) => {
-            if(event.key === "Esc" || event.key === "Escape") {
+            if (event.key === "Esc" || event.key === "Escape") {
                 div.remove();
             }
         })
@@ -146,6 +176,10 @@ window.onload = () => {
                 changeStyle(evt.target.id);
             })
         });
+
+        const speedSlider = document.querySelector('.speed_slider');
+        speedSlider.addEventListener('input', () => bubbles.changeSpeed(speedSlider.value)); 
+
 
         const musicPlayBtns = [...document.querySelectorAll('.songs-item-start-btn')];
         musicPlayBtns.forEach((el) => {

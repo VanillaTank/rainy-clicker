@@ -1,0 +1,59 @@
+.pulse {
+    background-color: #7de3e3;
+    border-radius: 50%;
+    animation: pulse 1.2s ease-out;
+    transform: scale(0);
+    position: absolute;
+    pointer-events: none;
+}
+  
+@keyframes pulse {
+    to {
+      transform: scale(2.5);
+      background-color: #fff;
+      opacity: 0;
+    }
+}
+
+.target {
+    position: absolute;
+    background-color: #323f79;
+    border-radius: 50%;
+    overflow: hidden;
+    animation: bubble 1.5s linear;
+    transform: scale(0);
+    opacity: 0.1;
+}
+
+@keyframes bubble {
+    70% {
+      transform: scale(2);
+      opacity: 0.7;
+    }
+    80% {
+        opacity: 0.5; 
+    }
+    90% {
+        opacity: 0.25; 
+    }
+    100% {
+        opacity: 0;
+        transform: scale(2.5);
+      }
+}
+
+button.active .started-music-text {
+    display: none;
+}
+
+button.active .paused-music-text {
+    display: block;
+}
+
+button .started-music-text {
+    display: block;
+}
+
+button .paused-music-text {
+    display: none;
+}

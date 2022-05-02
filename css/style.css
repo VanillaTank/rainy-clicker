@@ -14,6 +14,12 @@
     color: inherit;
 }
 
+body {
+    max-width: 100vw;
+    width: 100%;
+    overflow: hidden;
+}
+
 ul>li {
     list-style: none;
 }
@@ -175,7 +181,7 @@ ul>li {
 
 .audio-controls {
     display: grid;
-    grid-template-columns: 255px 45px 45px 114px 45px 45px;
+    grid-template-columns: 260px 45px 45px 114px 45px 45px;
     grid-column-gap: 15px;
 }
 

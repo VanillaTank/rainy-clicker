@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./img/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/bubbles.css">
     <title>Rainy clicker</title>
 </head>
 
@@ -15,7 +16,10 @@
     <div class="theme forest">
         <div class="container">
             <header class="header">
-                <button class="btn" id="toggle-game-btn" type="button">Start game</button>
+                <button class="btn" id="toggle-game-btn" type="button">
+                    <span class="started-music-text">bubbles!</span>
+                    <span class="paused-music-text">Pause</span>
+                </button>
                 <button class="btn" id="toggle-music-btn" type="button">
                     <span class="started-music-text">Start Music</span>
                     <span class="paused-music-text">Pause Music</span>
@@ -54,6 +58,7 @@
     <audio id="selectedSong"></audio>
 
     <script src="./js/Music.js"></script>
+    <script src="./js/Bubbles.js"></script>
     <script src="./js/main.js"></script>
 </body>
 

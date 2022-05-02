@@ -175,6 +175,7 @@ class Music {
             document.querySelector('.swap').classList.remove('active');
         }
         this.changeSettings('isSwapModeOn', this.isSwapModeOn);
+        this.changeSettings('isRepeatModeOn', this.isRepeatModeOn);
     }
 
     changeSettings(param, value) {
@@ -208,6 +209,7 @@ class Music {
         } else {
             document.querySelector('.loop').classList.remove('active');
         }
+        this.changeSettings('isSwapModeOn', this.isSwapModeOn);
         this.changeSettings('isRepeatModeOn', this.isRepeatModeOn);
     }
 
