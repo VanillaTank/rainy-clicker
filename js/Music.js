@@ -29,7 +29,8 @@ class Music {
     autoPlayTimeout = null;
     currentAudioHTMLElement = document.querySelector('#selectedSong');
     audioТameHTMLElement = document.querySelector('.audio-name');
-
+    
+    lastTimeout = null;
     currentTrackIndex = null;
     isSwapModeOn = null;
     isRepeatModeOn = false;
@@ -147,7 +148,14 @@ class Music {
 
     setVolume(volume) {
         document.querySelector('#selectedSong').volume = volume;
-        this.changeSettings('volume', volume);
+        if (this.lastTimeout) {
+           clearTimeout(this.lastTimeout)
+        }
+        this.lastTimeout = setTimeout(() => {
+            this.lastTimeout = null;
+            this.changeSettings('volume', volume); 
+        }, 200);
+
     }
 
     changePoint(selectedTime, fullWidth) {
