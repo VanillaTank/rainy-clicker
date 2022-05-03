@@ -2,6 +2,8 @@ window.onload = () => {
 
     const music = new Music();
     const bubbles = new Bubbles();
+    const rain = new Rain();
+
     let prevSongID = null;
     let wasBubbleStarted = false;
 
@@ -15,6 +17,7 @@ window.onload = () => {
         setDefaultSettings();
         music.setVolume(0.5);
         music.setSwapMode(false);
+        rain.startRain(true);
     } else {
         const settings = JSON.parse(localStorage.getItem('rainy-clicker-settings'));
         changeStyle(settings.theme);
@@ -23,6 +26,7 @@ window.onload = () => {
         music.setRepeatMode(settings.audio.isRepeatModeOn);
         bubbles.startBubbles();
         wasBubbleStarted = true;
+        rain.startRain(settings.isRainAnimation);
     }
 
     audioTrack.addEventListener('click', (event) => { music.changePoint(event.offsetX, audioTrack.offsetWidth) });
@@ -57,12 +61,22 @@ window.onload = () => {
 
     window.onblur = () => {
         bubbles.stopBubbles();
-        window.onfocus = () => { if (wasBubbleStarted) { bubbles.startBubbles() }};
+        window.onfocus = () => { if (wasBubbleStarted) { bubbles.startBubbles() } };
     };
 
-    window.addEventListener('focusout', () => { bubbles.stopBubbles() });
 
-    window.addEventListener('resize', () => { bubbles.updateBoundaries() })
+    // window.addEventListener('focusout', () => {
+    //     bubbles.stopBubbles();
+    //     window.addEventListener('focus', () => {
+    //         if (wasBubbleStarted) {
+    //             bubbles.startBubbles();
+    //         }
+    //     })
+    // });
+
+    window.addEventListener('resize', () => { bubbles.updateBoundaries() });
+
+    console.log(`Icon by https://www.deviantart.com/thesnakeedit`)
 
 
     // -----------------------------------------------------------------------------------
@@ -135,8 +149,7 @@ window.onload = () => {
     <div class="settings-section">
          <div class="settings-section-title">Анимация дождя</div>
          <div class="settings-rain-animation">
-             <button class="btn" id="rainOnBtn" type="button">ВКЛ.</button>
-             <button class="btn" id="rainOffBtn" type="button">ВЫКЛ.</button>
+         ${rain.getHTMLBtns()}
          </div>
     </div>
 
@@ -178,7 +191,18 @@ window.onload = () => {
         });
 
         const speedSlider = document.querySelector('.speed_slider');
-        speedSlider.addEventListener('input', () => bubbles.changeSpeed(speedSlider.value)); 
+        speedSlider.addEventListener('input', () => bubbles.changeSpeed(speedSlider.value));
+
+        document.querySelector('#rainOnBtn').addEventListener('click', () => {
+            document.querySelector('#rainOnBtn').classList.add('active');
+            document.querySelector('#rainOffBtn').classList.remove('active');
+            rain.startRain(true)
+        });
+        document.querySelector('#rainOffBtn').addEventListener('click', () => {
+            document.querySelector('#rainOnBtn').classList.remove('active');
+            document.querySelector('#rainOffBtn').classList.add('active');
+            rain.stopRain();
+        })
 
 
         const musicPlayBtns = [...document.querySelectorAll('.songs-item-start-btn')];
@@ -220,7 +244,7 @@ window.onload = () => {
         const settings = {
             theme: "leaves",
             speed: 0,  //TODO
-            rainAnimation: false,
+            isRainAnimation: true,
             audio: {
                 volume: 0.5,
                 isRepeatModeOn: false,

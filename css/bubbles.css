@@ -23,6 +23,7 @@
     animation: bubble 1.5s linear;
     transform: scale(0);
     opacity: 0.1;
+    cursor: pointer;
 }
 
 @keyframes bubble {

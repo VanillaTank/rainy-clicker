@@ -1,0 +1,74 @@
+index {
+    position: absolute;
+    top: -150px;
+    height: 150px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    animation: animate 6s linear infinite;
+    z-index: 0;
+    opacity: 0.5;
+}
+
+@keyframes animate {
+    0% {
+        transform: translateY(-150px);
+    }
+
+    100% {
+        transform: translateY(calc(100vh + 150px));
+    }
+}
+
+.window index:nth-child(4n+1) {
+    background: linear-gradient(transparent, #565668);
+}
+
+.window index:nth-child(4n+2) {
+    background: linear-gradient(transparent, rgb(127, 130, 127));
+}
+
+.window index:nth-child(4n+3) {
+    background: linear-gradient(transparent, rgb(108, 108, 108));
+}
+
+.window index:nth-child(4n+4) {
+    background: linear-gradient(transparent, rgb(79, 105, 131));
+}
+
+
+
+
+.forest index:nth-child(4n+1) {
+    background: linear-gradient(transparent, #797d78);
+}
+
+.forest index:nth-child(4n+2) {
+    background: linear-gradient(transparent, rgb(127, 130, 127));
+}
+
+.forest index:nth-child(4n+3) {
+    background: linear-gradient(transparent, rgb(132, 133, 126));
+}
+
+.forest index:nth-child(4n+4) {
+    background: linear-gradient(transparent, rgb(191, 194, 175));
+}
+
+
+
+
+.leaves index:nth-child(4n+1) {
+    background: linear-gradient(transparent, rgb(50, 58, 49));
+}
+
+.leaves index:nth-child(4n+2) {
+    background: linear-gradient(transparent, rgb(57, 71, 57));
+}
+
+.leaves index:nth-child(4n+3) {
+    background: linear-gradient(transparent, rgb(77, 87, 67));
+}
+
+.leaves index:nth-child(4n+4) {
+    background: linear-gradient(transparent, rgb(125, 128, 110));
+}

@@ -25,17 +25,18 @@ class Bubbles {
         const styledTarget = target.style;
 
         const diametr = Math.floor(25 + Math.random() * (50 + 1 - 25));
-        styledTarget.width = styledTarget.height = diametr + this.px
+        styledTarget.width = styledTarget.height = diametr + this.px;
 
-        const randomX = Math.floor((this.fieldMinX + diametr / 2) + Math.random() * ((this.fieldWidth + 1 - diametr / 2) - this.fieldMinX));
-        const randomY = Math.floor((this.fieldMinY + diametr / 2) + Math.random() * ((this.fieldHeight + 1 - diametr / 2) - this.fieldMinY));
+        const randomX = Math.floor((0 + diametr) + Math.random() * ((this.fieldWidth + 1 - diametr ) - diametr));
+        const randomY = Math.floor((0 + diametr ) + Math.random() * ((this.fieldHeight + 1 - diametr ) - diametr));
+
         styledTarget.left = randomX + this.px;
         styledTarget.top = randomY + this.px;
 
         this.field.appendChild(target);
 
         target.addEventListener('click', (event) => {
-            this.onClick(target, event.clientX, event.clientY)
+            this.onClick(target, event.clientX - this.fieldMinX, event.clientY - this.fieldMinY)
         })
         target.addEventListener('animationend', () => { target.remove() });
     }
@@ -86,7 +87,7 @@ class Bubbles {
         this.remove()
     }
 
-    changeSpeed (value) {
+    changeSpeed(value) {
         // от 1 до 8
         console.log(value);
 
