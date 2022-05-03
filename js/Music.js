@@ -15,15 +15,15 @@ class Music {
     ]
 
     // playlist = [
-    //     { title: '0', id: 'song0', path: '../sounds/5-am_by_danyvin.mp3' },
-    //     { title: '1', id: 'song1', path: '../sounds/barradeen-the-girl-i-havent-met.mp3' },
-    //     { title: '2', id: 'song2', path: '../sounds/coffee-time_by_pure.mp3' },
-    //     { title: '3', id: 'song3', path: '../sounds/ghostrifter-back-home.mp3' },
-    //     { title: '4', id: 'song4', path: '../sounds/ghostrifter-subtle-break.mp3' },
-    //     { title: '5', id: 'song5', path: '../sounds/le-gang-pain-away.mp3' },
-    //     { title: '6', id: 'song6', path: '../sounds/small-planets_by_finval.mp3' },
-    //     { title: '7', id: 'song7', path: '../sounds/stellar-sky_by_ahoami.mp3' },
-    //     { title: '8', id: 'song8', path: '../sounds/unreal-rest_by_roman-pchela.mp3' },
+    //     { title: '0', id: 'song0', path: './sounds/5-am_by_danyvin.mp3' },
+    //     { title: '1', id: 'song1', path: './sounds/barradeen-the-girl-i-havent-met.mp3' },
+    //     { title: '2', id: 'song2', path: './sounds/coffee-time_by_pure.mp3' },
+    //     { title: '3', id: 'song3', path: './sounds/ghostrifter-back-home.mp3' },
+    //     { title: '4', id: 'song4', path: './sounds/ghostrifter-subtle-break.mp3' },
+    //     { title: '5', id: 'song5', path: './sounds/le-gang-pain-away.mp3' },
+    //     { title: '6', id: 'song6', path: './sounds/small-planets_by_finval.mp3' },
+    //     { title: '7', id: 'song7', path: './sounds/stellar-sky_by_ahoami.mp3' },
+    //     { title: '8', id: 'song8', path: './sounds/unreal-rest_by_roman-pchela.mp3' },
     // ]
 
     autoPlayTimeout = null;

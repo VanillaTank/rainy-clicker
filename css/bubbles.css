@@ -20,7 +20,7 @@
     background-color: #323f79;
     border-radius: 50%;
     overflow: hidden;
-    animation: bubble 1.5s linear;
+    animation: bubble linear;
     transform: scale(0);
     opacity: 0.1;
     cursor: pointer;

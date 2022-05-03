@@ -24,10 +24,12 @@ window.onload = () => {
         music.setVolume(settings.audio.volume);
         music.setSwapMode(settings.audio.isSwapModeOn);
         music.setRepeatMode(settings.audio.isRepeatModeOn);
-        bubbles.startBubbles();
+        bubbles.startBubbles(settings.bubbleSpeed);
         wasBubbleStarted = true;
         rain.startRain(settings.isRainAnimation);
     }
+
+    const settings = JSON.parse(localStorage.getItem('rainy-clicker-settings'));
 
     audioTrack.addEventListener('click', (event) => { music.changePoint(event.offsetX, audioTrack.offsetWidth) });
 
@@ -49,7 +51,7 @@ window.onload = () => {
             wasBubbleStarted = false;
         }
         else {
-            bubbles.startBubbles();
+            bubbles.startBubbles(settings.bubbleSpeed);
             document.querySelector('#toggle-game-btn').classList.add('active');
             wasBubbleStarted = true;
         }
@@ -61,7 +63,11 @@ window.onload = () => {
 
     window.onblur = () => {
         bubbles.stopBubbles();
-        window.onfocus = () => { if (wasBubbleStarted) { bubbles.startBubbles() } };
+        window.onfocus = () => {
+            if (wasBubbleStarted) {
+                bubbles.startBubbles(settings.bubbleSpeed)
+            }
+        };
     };
 
 
@@ -69,7 +75,7 @@ window.onload = () => {
     //     bubbles.stopBubbles();
     //     window.addEventListener('focus', () => {
     //         if (wasBubbleStarted) {
-    //             bubbles.startBubbles();
+    //             bubbles.startBubbles(settings.bubbleSpeed);
     //         }
     //     })
     // });
@@ -111,13 +117,13 @@ window.onload = () => {
 
         document.querySelector('#greetingBtn').addEventListener('click', () => {
             div.remove();
-            bubbles.startBubbles();
+            bubbles.startBubbles(settings.bubbleSpeed);
             wasBubbleStarted = true;
         })
     }
 
     function showSettings() {
-
+        const settings = JSON.parse(localStorage.getItem('rainy-clicker-settings'));
         const div = document.createElement('div');
         div.classList.add('settings');
         div.innerHTML = `
@@ -142,7 +148,7 @@ window.onload = () => {
     <div class="settings-section">
          <div class="settings-section-title">Скорость</div>
          <div class="settings-game-speed">
-           <input class="speed_slider" type="range" min="1" max="8" step="1" value="4">
+           <input class="speed_slider" type="range" min="0" max="7" step="1" value="${settings.bubbleSpeed}">
          </div>
     </div>
 
@@ -176,7 +182,6 @@ window.onload = () => {
     }
 
     function settingsHandlers() {
-        const settings = JSON.parse(localStorage.getItem('rainy-clicker-settings'));
 
         document.querySelector(`#${settings.theme}`).classList.add('active');
 
@@ -191,7 +196,9 @@ window.onload = () => {
         });
 
         const speedSlider = document.querySelector('.speed_slider');
-        speedSlider.addEventListener('input', () => bubbles.changeSpeed(speedSlider.value));
+        speedSlider.addEventListener('input', () => {
+            bubbles.changeSpeed(speedSlider.value)
+        });
 
         document.querySelector('#rainOnBtn').addEventListener('click', () => {
             document.querySelector('#rainOnBtn').classList.add('active');
@@ -243,7 +250,7 @@ window.onload = () => {
     function setDefaultSettings() {
         const settings = {
             theme: "leaves",
-            speed: 0,  //TODO
+            bubbleSpeed: 3,
             isRainAnimation: true,
             audio: {
                 volume: 0.5,
