@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/bubbles.css">
     <link rel="stylesheet" href="./css/rain.css">
+    <link rel="stylesheet" href="./css/media.css">
     <title>Rainy clicker</title>
 </head>
 
@@ -18,19 +19,22 @@
         <div class="container">
             <header class="header">
                 <button class="btn" id="toggle-game-btn" type="button">
-                    <span class="started-music-text">bubbles!</span>
-                    <span class="paused-music-text">Pause</span>
+                    <span class="started-game-text">bubbles!</span>
+                    <span class="paused-game-text">Pause</span>
                 </button>
-                <button class="btn" id="toggle-music-btn" type="button">
-                    <span class="started-music-text">Start Music</span>
-                    <span class="paused-music-text">Pause Music</span>
-                </button>
+
 
                 <div class="player-field">
+
                     <div class="audio-controls" id="audio-controls">
 
+                        <button class="btn" id="toggle-music-btn" type="button">
+                            <span class="started-music-text">Start Music</span>
+                            <span class="paused-music-text">Pause Music</span>
+                        </button>
 
-                       <div class="audio-name"></div>
+
+                        <div class="audio-name"></div>
                         <div class="audio-track">
                             <div class="time"></div>
                         </div>
@@ -47,7 +51,9 @@
                     </div>
                 </div>
 
-                <button class="btn" id="settingsBtn" type="button">settings</button>
+                <button class="btn" id="settingsBtn" type="button">
+                    <span class="settings-text">settings</span>
+                </button>
             </header>
 
 
