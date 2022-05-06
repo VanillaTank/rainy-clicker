@@ -29,6 +29,8 @@ window.onload = () => {
         rain.startRain(settings.isRainAnimation);
     }
 
+    processHideControls()
+
     const settings = JSON.parse(localStorage.getItem('rainy-clicker-settings'));
 
     audioTrack.addEventListener('click', (event) => { music.changePoint(event.offsetX, audioTrack.offsetWidth) });
@@ -80,15 +82,32 @@ window.onload = () => {
     //     })
     // });
 
-    window.addEventListener('resize', () => { 
-        bubbles.updateBoundaries(); 
+    window.addEventListener('resize', () => {
+        bubbles.updateBoundaries();
         rain.startRain(settings.isRainAnimation);
+        processHideControls();
     });
 
     console.log(`Icon by https://www.deviantart.com/thesnakeedit`)
 
 
     // -----------------------------------------------------------------------------------
+
+
+    function processHideControls() {
+        const hideShowBtn = document.querySelector('.toggle-music-controller-btn');
+        if(hideShowBtn) {
+            hideShowBtn.addEventListener('click', (event) => {
+               //const btn = event.target;
+               hideShowBtn.classList.toggle('showed');
+               document.querySelector('.header').classList.toggle('showed');
+
+            //    if(!btn.classList.contains('showed')) {
+            //     hideShowBtn.ad
+            //    }
+            })
+        }
+    }
 
     function isSettingsInLocalStorage() {
         if (!localStorage.getItem('rainy-clicker-settings')) {

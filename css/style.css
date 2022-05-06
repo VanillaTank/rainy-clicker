@@ -801,3 +801,7 @@ ul>li {
 .settings-text {
     display: block;
 }
+
+.toggle-music-controller-btn {
+    display: none;
+}

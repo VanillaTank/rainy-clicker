@@ -2,12 +2,43 @@
     .header {
         display: grid;
         grid-row-gap: 25px;
+        height: 62px;
+        overflow: hidden;
     }
 
     #toggle-game-btn {
         grid-column: 1/3;
-        margin: 0 auto;
+        margin: 0;
+        grid-row: 1/2;
     }
+
+    .toggle-music-controller-btn {
+        grid-column: 1/3;
+        display: block;
+        margin: 0 0 0 auto !important;
+        grid-row: 1/2;
+    }
+
+    .toggle-music-controller-show-text {
+        display: block;
+    }
+    
+    .toggle-music-controller-hide-text {
+        display: none;
+    }
+
+    .showed .toggle-music-controller-show-text {
+        display: none;
+    }
+    
+    .showed .toggle-music-controller-hide-text {
+        display: block;
+    }
+
+    .showed.header {
+        height: auto;
+    }
+
 
     #settingsBtn {
         grid-row: 2/3;
@@ -156,6 +187,14 @@
         margin: 10px 0 20px;
         padding-bottom: 20px;
         grid-template-columns: 1fr 75px
+    }
+
+    .btn {
+        max-width: 110px;
+    } 
+
+    .toggle-music-controller-btn {
+        max-width: 90px;
     }
 
     .game-field {
