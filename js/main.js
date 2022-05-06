@@ -97,14 +97,9 @@ window.onload = () => {
     function processHideControls() {
         const hideShowBtn = document.querySelector('.toggle-music-controller-btn');
         if(hideShowBtn) {
-            hideShowBtn.addEventListener('click', (event) => {
-               //const btn = event.target;
+            hideShowBtn.addEventListener('click', () => {
                hideShowBtn.classList.toggle('showed');
                document.querySelector('.header').classList.toggle('showed');
-
-            //    if(!btn.classList.contains('showed')) {
-            //     hideShowBtn.ad
-            //    }
             })
         }
     }
@@ -183,14 +178,14 @@ window.onload = () => {
 
     <div class="settings-section music">
         <div class="settings-section-title">Volume</div>
-        <input class="volume" type="range" min="0" max="100" step="1">
+        <input class="volume" type="range" min="0" max="100" step="1" value="${settings.audio.volume}">
     </div>
 
     <div class="settings-section volume">
        <div class="settings-section-title">Music</div>
        <div class="settings-section-volume">
-          <button class="btn swap">mix</button>
-          <button class="btn loop">loop</button>
+          <button class="btn swap ${settings.audio.isSwapModeOn ? 'active' : ''}">mix</button>
+          <button class="btn loop ${settings.audio.isRepeatModeOn ? 'active' : ''}">loop</button>
        </div>
     </div>
 

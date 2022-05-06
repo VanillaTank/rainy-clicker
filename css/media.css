@@ -22,7 +22,7 @@
     .toggle-music-controller-show-text {
         display: block;
     }
-    
+
     .toggle-music-controller-hide-text {
         display: none;
     }
@@ -30,7 +30,7 @@
     .showed .toggle-music-controller-show-text {
         display: none;
     }
-    
+
     .showed .toggle-music-controller-hide-text {
         display: block;
     }
@@ -179,6 +179,13 @@
 
     .settings-body {
         margin: 20px;
+        border-radius: 17px;
+        max-width: 520px;
+        max-height: 600px;
+    }
+
+    .settings-body-scroll-wrap {
+        max-height: 520px;
     }
 }
 
@@ -191,7 +198,8 @@
 
     .btn {
         max-width: 110px;
-    } 
+        padding: 8px 12px;
+    }
 
     .toggle-music-controller-btn {
         max-width: 90px;
@@ -333,12 +341,18 @@
 
     .settings-body {
         padding: 48px 19px 42px 20px;
+        border-radius: 10px;
     }
 }
 
 @media (max-width: 455px) {
     .theme-thumb {
-        width: 80px;
-        height: 80px;
+        width: 60px;
+        height: 60px;
     }
+
+    .settings-body {
+        max-width: 370px;
+    }
+
 }
