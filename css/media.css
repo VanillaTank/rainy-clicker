@@ -343,6 +343,12 @@
         padding: 48px 19px 42px 20px;
         border-radius: 10px;
     }
+
+    .greeting-body {
+        padding: 25px 40px;
+        border-radius: 10px;
+        max-width: 410px;
+    }
 }
 
 @media (max-width: 455px) {
@@ -355,4 +361,27 @@
         max-width: 370px;
     }
 
+    .greeting-body {
+        padding: 24px 20px;
+        border-radius: 8px;
+        max-width: 320px;
+    }
+
+    .greeting-body p {
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+}
+
+@media (max-width: 340px) {
+    .greeting-body {
+        padding: 15px 15px;
+        border-radius: 6;
+        max-width: 280px;
+    }
+
+    .greetingBtn {
+        margin: 25px auto 0;
+    }
 }
