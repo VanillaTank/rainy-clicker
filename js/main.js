@@ -91,9 +91,9 @@ window.onload = () => {
                hideShowBtn.classList.toggle('showed');
                document.querySelector('.header').classList.toggle('showed');
                hideShowBtn.classList.add('listener-added');
+               bubbles.updateBoundaries();
             })
         }
-        bubbles.updateBoundaries();
     }
 
     function isSettingsInLocalStorage() {
