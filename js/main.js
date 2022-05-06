@@ -72,16 +72,6 @@ window.onload = () => {
         };
     };
 
-
-    // window.addEventListener('focusout', () => {
-    //     bubbles.stopBubbles();
-    //     window.addEventListener('focus', () => {
-    //         if (wasBubbleStarted) {
-    //             bubbles.startBubbles(settings.bubbleSpeed);
-    //         }
-    //     })
-    // });
-
     window.addEventListener('resize', () => {
         bubbles.updateBoundaries();
         rain.startRain(settings.isRainAnimation);
@@ -96,10 +86,11 @@ window.onload = () => {
 
     function processHideControls() {
         const hideShowBtn = document.querySelector('.toggle-music-controller-btn');
-        if(hideShowBtn) {
+        if(hideShowBtn && !hideShowBtn.classList.contains('listener-added')) {
             hideShowBtn.addEventListener('click', () => {
                hideShowBtn.classList.toggle('showed');
                document.querySelector('.header').classList.toggle('showed');
+               hideShowBtn.classList.add('listener-added');
             })
         }
     }
