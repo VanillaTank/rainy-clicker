@@ -8,6 +8,8 @@ class Rain {
         else { this.isRainAnimation = false }
 
 
+        [...document.querySelectorAll('index')].forEach(item => item.remove());
+
         if (this.isRainAnimation) {
             let body = document.querySelector('.theme');
             let quantity = document.body.getBoundingClientRect().width / 3;  //количество капель

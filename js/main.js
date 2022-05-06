@@ -80,7 +80,10 @@ window.onload = () => {
     //     })
     // });
 
-    window.addEventListener('resize', () => { bubbles.updateBoundaries() });
+    window.addEventListener('resize', () => { 
+        bubbles.updateBoundaries(); 
+        rain.startRain(settings.isRainAnimation);
+    });
 
     console.log(`Icon by https://www.deviantart.com/thesnakeedit`)
 
@@ -159,6 +162,20 @@ window.onload = () => {
          </div>
     </div>
 
+    <div class="settings-section music">
+        <div class="settings-section-title">Volume</div>
+        <input class="volume" type="range" min="0" max="100" step="1">
+    </div>
+
+    <div class="settings-section volume">
+       <div class="settings-section-title">Music</div>
+       <div class="settings-section-volume">
+          <button class="btn swap">mix</button>
+          <button class="btn loop">loop</button>
+       </div>
+    </div>
+
+
     <div class="settings-section">
         <div class="settings-section-title">Playlist</div>
           ${music.getPlaylist()}
@@ -210,6 +227,15 @@ window.onload = () => {
             document.querySelector('#rainOffBtn').classList.add('active');
             rain.stopRain();
         })
+
+        document.querySelector('.settings-body .volume')
+            .addEventListener('input', () => { music.setVolume(document.querySelector('.settings-body .volume').value / 100) });
+
+        document.querySelector('.settings-body .swap')
+            .addEventListener('click', () => music.onSwapModeHandler());
+
+        document.querySelector('.settings-body .loop')
+            .addEventListener('click', () => music.onRepeatModeHandler())
 
 
         const musicPlayBtns = [...document.querySelectorAll('.songs-item-start-btn')];

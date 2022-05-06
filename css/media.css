@@ -21,12 +21,48 @@
 }
 
 @media (max-width: 1030px) {
+    .toggle-music-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     .started-music-text {
         display: none !important;
     }
 
     .paused-music-text {
         display: none !important;
+    }
+
+    .start-music-icon {
+        display: inline-block;
+        margin-left: -4px;
+        margin-top: 1px;
+    }
+
+    .paused-music-icon {
+        display: none;
+        margin-left: -2px;
+        margin-top: 2px;
+    }
+
+    .active .start-music-icon {
+        display: none;
+    }
+
+    .active .paused-music-icon {
+        display: inline-block;
+    }
+
+    .settings-icon {
+        display: block;
+        margin-top: -1px;
+        margin-left: 1px;
+    }
+
+    .settings-text {
+        display: none;
     }
 
     .audio-controls {
@@ -39,6 +75,9 @@
 
     #settingsBtn {
         width: 45px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 
@@ -106,20 +145,161 @@
     .header {
         margin: 20px 0 20px;
     }
+
+    .settings-body {
+        margin: 20px;
+    }
 }
 
 @media (max-width: 544px) {
     .header {
         margin: 10px 0 20px;
         padding-bottom: 20px;
+        grid-template-columns: 1fr 75px
     }
+
     .game-field {
         margin-bottom: 10px;
     }
-    .header {
-        overflow: auto;
+
+    .audio-controls .volume {
+        display: none;
     }
+
+    .audio-controls .swap {
+        display: none;
+    }
+
+    .audio-controls .loop {
+        display: none;
+    }
+
     #settingsBtn {
         margin-left: 30px;
+    }
+
+    .audio-controls {
+        grid-template-columns: 45px 45px 1fr;
+    }
+
+
+    .settings-section.music {
+        display: block;
+    }
+
+    .settings-section.volume {
+        display: block;
+        background-image: none;
+    }
+
+    .settings-section-volume {
+        display: flex;
+    }
+
+    .music .volume {
+        background-image: none;
+        width: 100%;
+        height: 3px;
+    }
+
+    .music .volume::-webkit-slider-runnable-track {
+        height: 3px;
+        border-radius: 1px;
+        cursor: pointer;
+    }
+
+    .forest .music .volume::-webkit-slider-runnable-track {
+        background-color: #1C1F1C;
+    }
+
+    .window .music .volume::-webkit-slider-runnable-track {
+        background-color: #4B556A;
+    }
+
+    .leaves .music .volume::-webkit-slider-runnable-track {
+        background-color: #43453A;
+    }
+
+    .music .volume::-moz-range-track {
+        height: 3px;
+        border-radius: 1px;
+        cursor: pointer;
+    }
+
+    .forest .music .volume::-moz-range-track {
+        background-color: #1C1F1C;
+    }
+
+    .window .music .volume::-moz-range-track {
+        background-color: #4B556A;
+    }
+
+    .leaves .music .volume::-moz-range-track {
+        background-color: #43453A;
+    }
+
+    .music .volume::-webkit-slider-thumb {
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        -webkit-appearance: none;
+        margin-top: -9px;
+    }
+
+    .forest .music .volume::-webkit-slider-thumb {
+        background: #1C1F1C;
+        border: 1px solid #1C1F1C;
+    }
+
+    .window .music .volume::-webkit-slider-thumb {
+        background: #4B556A;
+        border: 1px solid #4B556A;
+    }
+
+    .leaves .music .volume::-webkit-slider-thumb {
+        background: #43453A;
+        border: 1px solid #43453A;
+    }
+
+    .music .volume::-moz-range-thumb {
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        -webkit-appearance: none;
+        margin-top: -9px;
+    }
+
+    .forest .music .volume::-moz-range-thumb {
+        background: #1C1F1C;
+        border: 1px solid #1C1F1C;
+    }
+
+    .window .music .volume::-moz-range-thumb {
+        background: #4B556A;
+        border: 1px solid #4B556A;
+    }
+
+    .leaves .music .volume::-moz-range-thumb {
+        background: #43453A;
+        border: 1px solid #43453A;
+    }
+
+    .music .volume::-webkit-slider-thumb:active {
+        box-shadow: 0 0 3px rgba(242, 232, 213, .59);
+    }
+
+    .music .volume::-moz-range-thumb:active {
+        box-shadow: 0 0 3px rgba(242, 232, 213, .59);
+    }
+
+    .settings-body {
+        padding: 48px 19px 42px 20px;
+    }
+}
+
+@media (max-width: 455px) {
+    .theme-thumb {
+        width: 80px;
+        height: 80px;
     }
 }

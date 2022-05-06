@@ -171,8 +171,11 @@ class Music {
         if (this.isSwapModeOn) {
             document.querySelector('.swap').classList.add('active');
             document.querySelector('.loop').classList.remove('active');
+            document.querySelector('.settings-body .swap').classList.add('active');
+            document.querySelector('.settings-body .loop').classList.remove('active');
         } else {
             document.querySelector('.swap').classList.remove('active');
+            document.querySelector('.settings-body .swap').classList.remove('active');
         }
         this.changeSettings('isSwapModeOn', this.isSwapModeOn);
         this.changeSettings('isRepeatModeOn', this.isRepeatModeOn);
@@ -206,8 +209,11 @@ class Music {
         if (this.isRepeatModeOn) {
             document.querySelector('.loop').classList.add('active');
             document.querySelector('.swap').classList.remove('active');
+            document.querySelector('.settings-body .swap').classList.remove('active');
+            document.querySelector('.settings-body .loop').classList.add('active');
         } else {
             document.querySelector('.loop').classList.remove('active');
+            document.querySelector('.settings-body .loop').classList.remove('active');
         }
         this.changeSettings('isSwapModeOn', this.isSwapModeOn);
         this.changeSettings('isRepeatModeOn', this.isRepeatModeOn);

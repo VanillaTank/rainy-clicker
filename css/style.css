@@ -777,3 +777,27 @@ ul>li {
 #rainOnBtn.active, #rainOffBtn.active {
   border: 2px solid red;
 }
+
+.settings-section.music {
+    display: none;
+}
+
+.settings-section.volume {
+    display: none;
+}
+
+.start-music-icon {
+    display: none;
+}
+
+.paused-music-icon {
+    display: none;
+}
+
+.settings-icon {
+    display: none;
+}
+
+.settings-text {
+    display: block;
+}
