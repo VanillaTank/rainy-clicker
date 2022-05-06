@@ -2,7 +2,7 @@
     .header {
         display: grid;
         grid-row-gap: 25px;
-        height: 62px;
+        height: 60px;
         overflow: hidden;
     }
 
