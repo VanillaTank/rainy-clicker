@@ -48,11 +48,11 @@ class Rain {
 
     getHTMLBtns() {
         if (this.isRainAnimation) {
-            return `<button class="btn active" id="rainOnBtn" type="button">ВКЛ.</button>
-                    <button class="btn" id="rainOffBtn" type="button">ВЫКЛ.</button>`
+            return `<button class="btn active" id="rainOnBtn" type="button">ON</button>
+                    <button class="btn" id="rainOffBtn" type="button">OFF</button>`
         } else {
-            return `<button class="btn" id="rainOnBtn" type="button">ВКЛ.</button>
-                    <button class="btn active" id="rainOffBtn" type="button">ВЫКЛ.</button>`
+            return `<button class="btn" id="rainOnBtn" type="button">ON</button>
+                    <button class="btn active" id="rainOffBtn" type="button">OFF</button>`
         }
     }
 

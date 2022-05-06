@@ -140,7 +140,7 @@ window.onload = () => {
     </button>
 
     <div class="settings-section">
-         <div class="settings-section-title">Выбор фона</div>
+         <div class="settings-section-title">Background</div>
          <div class="settings-bgc">
            <button class="theme-thumb" id="forest" type="button"></button>
            <button class="theme-thumb" id="window" type="button"></button>
@@ -149,14 +149,14 @@ window.onload = () => {
     </div>
 
     <div class="settings-section">
-         <div class="settings-section-title">Скорость</div>
+         <div class="settings-section-title">Speed</div>
          <div class="settings-game-speed">
            <input class="speed_slider" type="range" min="0" max="7" step="1" value="${settings.bubbleSpeed}">
          </div>
     </div>
 
     <div class="settings-section">
-         <div class="settings-section-title">Анимация дождя</div>
+         <div class="settings-section-title">Rain animation</div>
          <div class="settings-rain-animation">
          ${rain.getHTMLBtns()}
          </div>
