@@ -93,6 +93,7 @@ window.onload = () => {
                hideShowBtn.classList.add('listener-added');
             })
         }
+        bubbles.updateBoundaries();
     }
 
     function isSettingsInLocalStorage() {
