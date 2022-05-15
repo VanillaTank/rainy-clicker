@@ -1,4 +1,61 @@
 @media (max-width:1170px) {
+    .started-music-text {
+        display: none !important;
+    }
+
+    .paused-music-text {
+        display: none !important;
+    }
+
+    .start-music-icon {
+        display: inline-block;
+        margin-top: 3px;
+    }
+
+    .paused-music-icon {
+        display: none;
+        margin-left: -2px;
+        margin-top: 2px;
+    }
+
+    .active .start-music-icon {
+        display: none;
+    }
+
+    .active .paused-music-icon {
+        display: inline-block;
+    }
+
+    .settings-icon {
+        display: block;
+        margin-top: -1px;
+        margin-left: 1px;
+    }
+
+    .settings-text {
+        display: none;
+    }
+
+    #settingsBtn {
+        width: 45px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #toggle-music-btn {
+        width: 45px;
+        height: 45px;
+        margin: 0 0 0 auto;
+    }
+
+    .audio-controls {
+        grid-template-columns: 45px 260px 45px 45px 114px 45px 45px;
+    }
+}
+
+@media (max-width: 930px) {
+
     .header {
         display: grid;
         grid-row-gap: 25px;
@@ -49,67 +106,7 @@
         grid-row: 2/3;
         padding: 0;
     }
-}
 
-@media (max-width: 1030px) {
-    .toggle-music-btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 45px;
-    }
-
-    .started-music-text {
-        display: none !important;
-    }
-
-    .paused-music-text {
-        display: none !important;
-    }
-
-    .start-music-icon {
-        display: inline-block;
-        margin-top: 3px;
-    }
-
-    .paused-music-icon {
-        display: none;
-        margin-left: -2px;
-        margin-top: 2px;
-    }
-
-    .active .start-music-icon {
-        display: none;
-    }
-
-    .active .paused-music-icon {
-        display: inline-block;
-    }
-
-    .settings-icon {
-        display: block;
-        margin-top: -1px;
-        margin-left: 1px;
-    }
-
-    .settings-text {
-        display: none;
-    }
-
-    .audio-controls {
-        grid-template-columns: 45px 260px 45px 45px 114px 45px 45px;
-    }
-
-    .settings-text {
-        display: none !important;
-    }
-
-    #settingsBtn {
-        width: 45px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
 }
 
 @media (max-width: 814px) {
@@ -377,7 +374,7 @@
 @media (max-width: 340px) {
     .greeting-body {
         padding: 15px 15px;
-        border-radius: 6;
+        border-radius: 6px;
         max-width: 280px;
     }
 
