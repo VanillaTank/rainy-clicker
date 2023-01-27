@@ -7,7 +7,6 @@ class Rain {
         if (isAllow) { this.isRainAnimation = true }
         else { this.isRainAnimation = false }
 
-
         [...document.querySelectorAll('index')].forEach(item => item.remove());
 
         if (this.isRainAnimation) {
@@ -30,17 +29,17 @@ class Rain {
                 body.appendChild(drop)
                 index++;
             }
+            this.changeRainSettings(true);
         }
     }
 
     stopRain() {
         this.isRainAnimation = false;
         [...document.querySelectorAll('index')].forEach(item => item.remove());
+        this.changeRainSettings(false);
     }
 
-    changeRainSettings() {
-        this.isRainAnimation = !this.isRainAnimation;
-
+    changeRainSettings(value) {
         let settings = JSON.parse(localStorage.getItem('rainy-clicker-settings'));
         settings.isRainAnimation = value;
         localStorage.setItem('rainy-clicker-settings', JSON.stringify(settings));

@@ -1,5 +1,15 @@
 class Bubbles {
 
+    get bubbleBgc() {
+        let color = JSON.parse(localStorage.getItem('rainy-clicker-settings'))?.bubbleColor || '';
+        return color ? color : '#66CCFF';
+    }
+
+    get bubbleBurstBgc() {
+        let color = JSON.parse(localStorage.getItem('rainy-clicker-settings'))?.bubbleBurstColor || '';
+        return color ? color : '#336699';
+    }
+
     field = document.querySelector('.game-field');
 
     fieldWidth = this.field.getBoundingClientRect().width;
@@ -7,29 +17,34 @@ class Bubbles {
     fieldMinX = Math.round(this.field.getBoundingClientRect().x);
     fieldMinY = Math.round(this.field.getBoundingClientRect().y);
     speedVars = [
-        { bubbleCreation: 3600, animationTime: 2.1 },
-        { bubbleCreation: 3400, animationTime: 1.9 },
-        { bubbleCreation: 3000, animationTime: 1.7 },
-        { bubbleCreation: 2500, animationTime: 1.5 },
-        { bubbleCreation: 2000, animationTime: 1.3 },
-        { bubbleCreation: 1500, animationTime: 1.1 },
-        { bubbleCreation: 1000, animationTime: 1 },
-        { bubbleCreation: 800, animationTime: 0.9 },
+        { bubbleCreation: 3600, animationTime: 2.1, pulseAnimationTime: 2.8 },
+        { bubbleCreation: 3400, animationTime: 1.9, pulseAnimationTime: 2.8 },
+        { bubbleCreation: 3000, animationTime: 1.7, pulseAnimationTime: 2.5},
+        { bubbleCreation: 2500, animationTime: 1.5, pulseAnimationTime: 2.3},
+        { bubbleCreation: 2000, animationTime: 1.3, pulseAnimationTime: 2.1},
+        { bubbleCreation: 1500, animationTime: 1.1, pulseAnimationTime: 1.9 },
+        { bubbleCreation: 1000, animationTime: 1, pulseAnimationTime: 1.8 },
+        { bubbleCreation: 800, animationTime: 0.9, pulseAnimationTime: 1.7 },
     ]
 
     bubbleSpeed = null;  // то, что должно придти из настроек
     intervalSpeed = null;  // скорость отрисовки новых целей
     animationTime = null;   // скорость анимации
-
     startBubbleInterval = null;
+    bubbleBgcObtained = null; // получили цвет из локального хранилища
+    bubbleBurstBgcObtained = null; // получили цвет из локального хранилища
+    px = 'px';
 
-    px = 'px'
-
+    constructor() {
+        this.bubbleBgcObtained = this.bubbleBgc;
+        this.bubbleBurstBgcObtained = this.bubbleBurstBgc;
+    }
 
 
     setCurentSpeed() {
         this.intervalSpeed = this.speedVars[this.bubbleSpeed].bubbleCreation;
         this.animationTime = this.speedVars[this.bubbleSpeed].animationTime;
+        this.pulseAnimationTime = this.speedVars[this.bubbleSpeed].pulseAnimationTime;
     }
 
     startBubbles(bubbleSpeed) {
@@ -54,6 +69,7 @@ class Bubbles {
 
         styledTarget.left = randomX + this.px;
         styledTarget.top = randomY + this.px;
+        styledTarget.backgroundColor = this.bubbleBgcObtained;
 
         this.field.appendChild(target);
 
@@ -99,6 +115,8 @@ class Bubbles {
         styledDiv.width = styledDiv.height = randomDiametr + this.px;
         styledDiv.left = clientX - (randomDiametr / 2) + this.px;
         styledDiv.top = clientY - (randomDiametr / 2) + this.px;
+        styledDiv.backgroundColor = this.bubbleBurstBgcObtained;
+        styledDiv.animationDuration = this.pulseAnimationTime + 's';
 
         this.field.appendChild(div);
 
@@ -115,9 +133,22 @@ class Bubbles {
         this.stopBubbles();
         this.startBubbles(this.bubbleSpeed);
 
-        let settings = JSON.parse(localStorage.getItem('rainy-clicker-settings'));
-        settings.bubbleSpeed = this.bubbleSpeed;
-        localStorage.setItem('rainy-clicker-settings', JSON.stringify(settings));
+        this.storageSettings('bubbleSpeed', this.bubbleSpeed)
+    }
 
+    changeBubbleColor(color) {
+        this.bubbleBgcObtained = color;
+        this.storageSettings('bubbleColor', color);
+    }
+
+    changeBubbleBurstColor(color) {
+        this.bubbleBurstBgcObtained = color;
+        this.storageSettings('bubbleBurstColor', color);
+    }
+
+    storageSettings(settingName, value) {
+        let settings = JSON.parse(localStorage.getItem('rainy-clicker-settings'));
+        settings[settingName] = value;
+        localStorage.setItem('rainy-clicker-settings', JSON.stringify(settings));
     }
 }

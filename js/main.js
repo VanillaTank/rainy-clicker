@@ -78,7 +78,8 @@ window.onload = () => {
         processHideControls();
     });
 
-    console.log(`Icon by https://www.deviantart.com/thesnakeedit`)
+    console.log(`Icon by https://www.deviantart.com/thesnakeedit`);
+    console.log('Cursor by Ivan Abirawa - Flaticon');
 
 
     // -----------------------------------------------------------------------------------
@@ -86,12 +87,12 @@ window.onload = () => {
 
     function processHideControls() {
         const hideShowBtn = document.querySelector('.toggle-music-controller-btn');
-        if(hideShowBtn && !hideShowBtn.classList.contains('listener-added')) {
+        if (hideShowBtn && !hideShowBtn.classList.contains('listener-added')) {
             hideShowBtn.addEventListener('click', () => {
-               hideShowBtn.classList.toggle('showed');
-               document.querySelector('.header').classList.toggle('showed');
-               hideShowBtn.classList.add('listener-added');
-               bubbles.updateBoundaries();
+                hideShowBtn.classList.toggle('showed');
+                document.querySelector('.header').classList.toggle('showed');
+                hideShowBtn.classList.add('listener-added');
+                bubbles.updateBoundaries();
             })
         }
     }
@@ -155,6 +156,22 @@ window.onload = () => {
     </div>
 
     <div class="settings-section">
+         <div class="settings-section-title">Colors</div>
+         <div class="settings-game-colors">
+     
+                <div class="settings__colors-wrap">
+                    Bubbles <button class="settings__color-btn" id="selectBubbleColorBtn"></button>
+                </div>
+       
+       
+                <div  class="settings__colors-wrap">
+                    Bubble burst <button class="settings__color-btn" id="selectBubbleBurstColorBtn"></button>
+                </div>
+         
+         </div>
+    </div>
+
+    <div class="settings-section">
          <div class="settings-section-title">Speed</div>
          <div class="settings-game-speed">
            <input class="speed_slider" type="range" min="0" max="7" step="1" value="${settings.bubbleSpeed}">
@@ -191,6 +208,9 @@ window.onload = () => {
 
         document.querySelector('.theme').append(div);
 
+        document.querySelector('#selectBubbleColorBtn').style.backgroundColor = bubbles.bubbleBgc;
+        document.querySelector('#selectBubbleBurstColorBtn').style.backgroundColor = bubbles.bubbleBurstBgc;
+
         document.querySelector('#closeSettingsBtn').addEventListener('click', () => {
             div.remove();
         })
@@ -226,7 +246,7 @@ window.onload = () => {
         document.querySelector('#rainOnBtn').addEventListener('click', () => {
             document.querySelector('#rainOnBtn').classList.add('active');
             document.querySelector('#rainOffBtn').classList.remove('active');
-            rain.startRain(true)
+            rain.startRain(true);
         });
         document.querySelector('#rainOffBtn').addEventListener('click', () => {
             document.querySelector('#rainOnBtn').classList.remove('active');
@@ -267,6 +287,65 @@ window.onload = () => {
                 prevSongID = id;
             })
         })
+
+        document.querySelector('#selectBubbleColorBtn').addEventListener('click', (evt) => {
+            if (document.querySelector('#selectBubbleColorBtn').classList.contains('active')) {
+                document.querySelector('#select-color-canvas').remove();
+                document.querySelector('#selectBubbleColorBtn').classList.remove('active');
+                return;
+            }
+            document.querySelector('#selectBubbleBurstColorBtn').classList.remove('active');
+            document.querySelector('#selectBubbleColorBtn').classList.add('active');
+            createCanvas(evt);
+        });
+
+        document.querySelector('#selectBubbleBurstColorBtn').addEventListener('click', (evt) => {
+            if (document.querySelector('#selectBubbleBurstColorBtn').classList.contains('active')) {
+                document.querySelector('#select-color-canvas').remove();
+                document.querySelector('#selectBubbleBurstColorBtn').classList.remove('active');
+                return;
+            }
+            document.querySelector('#selectBubbleColorBtn').classList.remove('active');
+            document.querySelector('#selectBubbleBurstColorBtn').classList.add('active');
+            createCanvas(evt);
+        })
+    }
+
+    function createCanvas(evt) {
+        if (document.querySelector('#select-color-canvas')) {
+            document.querySelector('#select-color-canvas').remove();
+        }
+        let div = document.createElement('div');
+        div.innerHTML = '<canvas id="select-color-canvas"></canvas>';
+        const target = evt.target;
+        target.after(div);
+        const canvas = document.querySelector('#select-color-canvas');
+        const w = 234;  // размеры картинки палитры
+        const h = 199;  // размеры картинки палитры
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext('2d');
+
+        const image = new Image();
+        image.src = './img/palitra.png';
+        image.onload = function () {
+            ctx.drawImage(image, 0, 0, image.width, image.height);
+        }
+        canvas.onclick = (e) => handleCanvasColor(e, target, ctx);
+    }
+
+    function handleCanvasColor(e, target, ctx) {
+        const x = e.offsetX;
+        const y = e.offsetY;
+        const pixel = ctx.getImageData(x, y, 1, 1).data;
+        const pixelColor = "rgb(" + pixel[0] + ", " + pixel[1] + ", " + pixel[2] + ")";
+        target.style.backgroundColor = pixelColor;
+        if (target.id === 'selectBubbleColorBtn') {
+            bubbles.changeBubbleColor(pixelColor);
+        } else if (target.id === 'selectBubbleBurstColorBtn') {
+            bubbles.changeBubbleBurstColor(pixelColor);
+        }
+
     }
 
     function changeStyle(newTheme) {
@@ -281,14 +360,17 @@ window.onload = () => {
 
     function setDefaultSettings() {
         const settings = {
-            theme: "leaves",
+            theme: "forest",
             bubbleSpeed: 3,
             isRainAnimation: true,
             audio: {
                 volume: 0.5,
                 isRepeatModeOn: false,
                 isSwapModeOn: false
-            }
+            },
+            bubbleColor: '#66CCFF',
+            bubbleBurstColor: '#336699',
+
         };
 
         localStorage.setItem('rainy-clicker-settings', JSON.stringify(settings))

@@ -12,6 +12,7 @@
     outline: none;
     font-family: "InterRegular";
     color: inherit;
+    cursor: url('../img/cursor.png'), default;
 }
 
 body {
@@ -30,6 +31,7 @@ ul>li {
     font-family: inherit;
     cursor: pointer;
     background-color: transparent;
+    cursor: url('../img/cursor.png'), pointer;
 }
 
 .roundBtn {
@@ -40,6 +42,7 @@ ul>li {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: url('../img/cursor.png'), pointer;
 }
 
 .forest .roundBtn {
@@ -111,7 +114,7 @@ ul>li {
     padding: 10px 18px;
     border-radius: 5px;
     font-family: inherit;
-    cursor: pointer;
+    cursor: url('../img/cursor.png'), pointer;
     white-space: nowrap;
     display: inline-block;
     max-width: 190px;
@@ -254,7 +257,7 @@ ul>li {
     appearance: none;
     background-color: transparent;
     -moz-appearance: none;
-    cursor: pointer;
+    cursor: url('../img/cursor.png'), pointer;
 
     background-image: url('../img/polygon.svg');
     background-position: center;
@@ -321,9 +324,17 @@ ul>li {
     grid-row: 1/3;
 }
 
+.swap span {
+    margin-top: -3px;
+}
+
 .loop {
     grid-column: 7/8;
     grid-row: 1/3;
+}
+
+.loop span {
+    margin-top: -1px;
 }
 
 .loop.active {
@@ -391,7 +402,7 @@ ul>li {
 }
 
 .settings-body {
-    padding: 55px 24px 42px 57px;
+    padding: 55px 24px 42px 40px;
     background-color: #fff;
     border-radius: 23px;
     position: relative;
@@ -404,7 +415,7 @@ ul>li {
     position: absolute;
     box-shadow: none;
     border: none;
-    cursor: pointer;
+    cursor: url('../img/cursor.png'), pointer;
     background-color: transparent;
     width: 20px;
     height: 20px;
@@ -437,14 +448,52 @@ ul>li {
     margin-bottom: 15px;
 }
 
+.settings-game-colors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.settings__colors-wrap {
+    display: flex;
+    max-width: 234px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    line-height: 27px;
+    gap: 10px;
+    width: 50%;
+}
+
+.settings__color-btn {
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    border-radius: 4px;
+    cursor: url('../img/cursor.png'), pointer;
+}
+
+#selectBubbleColorBtn {
+    background-color: #66CCFF;
+}
+
+#selectBubbleBurstColorBtn {
+    background-color: #336699;
+}
 .settings-bgc {
     display: flex;
+}
+
+#select-color-canvas {
+    clip-path: path('M9.5 91.5L1 95.5V105.5L10 109.5V120.5L19 124.5V135.5L28 139.5V150.5L37 154.5V165.5L46 169.5V180.5L55 185V195.5L63 199.5H66L72 195.5H74L81 199.5H84L90 195.5H92L99 199.5H102L108 195.5H110L117 199.5H120L126 195.5H128L135 199.5H138L144 195.5H146L153 199.5H156L162 195.5H164L171 199.5H174L181 195.5V185.5L190 180.5V170.5L199 165.5V155.5L208 150.5V140.5L217 135.5V125.5L226 120.5V110.5L235 105.5V94.5L226 91V79.5L217 76V65.5L208 61V50L199 46V35L190 30.5V20L181 15.5V5L173.5 1.5H171L165 5H162.5L155.5 1.5H153.5L146.5 5H144.5L137.5 1.5H135.5L129 5H127L119.5 1.5H117L111 5H109.5L101.5 1.5H99L92.5 5H90.5L83.5 1H81.5L74.5 5.5H72.5L65.5 1.5H63L55 5.5V16.5L46 20.5V31L37 35.5V46L28 50.5V61L18.5 65.5V76.5L9.5 80.5V91.5Z');
 }
 
 .theme-thumb {
     box-shadow: none;
     border: none;
-    cursor: pointer;
+    cursor: url('../img/cursor.png'), pointer;
     background-color: transparent;
     width: 100px;
     height: 100px;
@@ -598,7 +647,7 @@ ul>li {
 .speed_slider::-webkit-slider-runnable-track {
     height: 3px;
     border-radius: 1px;
-    cursor: pointer;
+    cursor: url('../img/cursor.png'), pointer;
 }
 
 .forest .speed_slider::-webkit-slider-runnable-track {
@@ -616,7 +665,7 @@ ul>li {
 .speed_slider::-moz-range-track {
     height: 3px;
     border-radius: 1px;
-    cursor: pointer;
+    cursor: url('../img/cursor.png'), pointer;
 }
 
 .forest .speed_slider::-moz-range-track {
@@ -717,7 +766,7 @@ ul>li {
 .audio-track {
     width: 260px;
     height: 5px;
-    cursor: pointer;
+    cursor: url('../img/cursor.png'), pointer;
     border-radius: 4px;
     grid-column: 2/3;
     margin-left: 5px;

@@ -184,6 +184,10 @@
     .settings-body-scroll-wrap {
         max-height: 520px;
     }
+
+    #selectBubbleColorBtn {
+        margin-left: 35px;
+    }
 }
 
 @media (max-width: 544px) {
@@ -234,6 +238,10 @@
     .settings-section.volume {
         display: block;
         background-image: none;
+    }
+
+    .settings__colors-wrap {
+        width: 100%;
     }
 
     .settings-section-volume {

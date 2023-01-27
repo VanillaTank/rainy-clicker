@@ -1,5 +1,4 @@
 .pulse {
-    background-color: #44789b;
     border-radius: 50%;
     animation: pulse 1.2s ease-out;
     transform: scale(0);
@@ -17,13 +16,12 @@
 
 .target {
     position: absolute;
-    background-color: #8ac5e5;
     border-radius: 50%;
     overflow: hidden;
     animation: bubble linear;
     transform: scale(0);
     opacity: 0.1;
-    cursor: pointer;
+    cursor: url('../img/cursor.png'), pointer;
 }
 
 @keyframes bubble {
